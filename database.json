@@ -1,0 +1,14 @@
+{
+	"users": {
+		"dave": {
+			"balance": 360,
+			"items": [
+				"candle",
+				"torch"
+			]
+		},
+		"vera": {
+			"balance": 3
+		}
+	}
+}

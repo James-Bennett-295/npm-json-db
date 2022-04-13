@@ -1,0 +1,27 @@
+{
+  "name": "@james-bennett-295/json-db",
+  "version": "1.0.0",
+  "description": "JSON database",
+  "main": "./index.mjs",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/James-Bennett-295/npm-json-db.git"
+  },
+  "keywords": [
+    "db",
+    "database",
+    "json"
+  ],
+  "author": "James Bennett",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/James-Bennett-295/npm-json-db/issues"
+  },
+  "homepage": "https://github.com/James-Bennett-295/npm-json-db#readme",
+  "dependencies": {
+    "@james-bennett-295/writefile": "^1.0.0"
+  }
+}
