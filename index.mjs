@@ -13,9 +13,10 @@ function getPointer(obj, prop) {
 
 class Database extends EventEmitter {
 
-	constructor(filename) {
+	constructor(filename, autoSave) {
 		super();
 		this.filename = filename;
+		this.autoSave = autoSave;
 		this.data = {}
 		if (fs.existsSync(this.filename)) {
 			fs.readFile(this.filename, "utf8", (err, json) => {
@@ -55,6 +56,7 @@ class Database extends EventEmitter {
 		let propFinal = pointerProp.pop();
 		let pointer = getPointer(this.data, pointerProp);
 		pointer[propFinal] = val;
+		if (this.autoSave) this.save();
 	}
 	get(propStr) {
 		try {
@@ -72,6 +74,7 @@ class Database extends EventEmitter {
 		} else {
 			this.set(propStr, [item]);
 		}
+		if (this.autoSave) this.save();
 	}
 	add(propStr, num) {
 		let property = this.get(propStr);
@@ -80,15 +83,18 @@ class Database extends EventEmitter {
 		} else {
 			this.set(propStr, num);
 		}
+		if (this.autoSave) this.save();
 	}
 	sub(propStr, num, noNeg) {
 		let property = this.get(propStr);
 		if (typeof property === "number") {
 			if (noNeg && property - num < 0) return false;
 			this.set(propStr, property - num);
+			if (this.autoSave) this.save();
 			return true;
 		} else {
 			this.set(propStr, 0);
+			if (this.autoSave) this.save();
 			return false;
 		}
 	}
@@ -96,6 +102,7 @@ class Database extends EventEmitter {
 		let success = this.sub(fromPropStr, num, true);
 		if (!success) return false;
 		this.add(toPropStr, num);
+		if (this.autoSave) this.save();
 		return true;
 	}
 }
